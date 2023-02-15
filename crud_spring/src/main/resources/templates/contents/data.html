@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/navbar :: html_head}"></head>
+<body style="background-color: #f0f1f2;">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container pt-2 my-5">
+        <div class="row">
+            <div class="col-md-10 offset-1">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <a href="/inputData" class="btn btn-primary">Add Data</a>
+                    </div>
+                    
+                    <!-- Masih Error -->
+                    <!-- <div th:if="${session.msg}">
+                        <h5 class="text-center text-success pt-3 fst-italic text-decoration-underline" th:text="${session.msg}"></h5> -->
+                        <!-- <th:block th:text="${#session.removeAttribute('msg')}"></th:block> -->
+                    <!-- </div> -->
+
+                    <!-- Start Table -->
+                    <div class="card-body text-center">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        <a th:href="@{'/page/'+${pageNo}+'?sortField=id&sortDir='+${revSortDir} } ">ID</a> 
+                                    </th>
+                                    <th scope="col">
+                                        <a th:href="@{'/page/'+${pageNo}+'?sortField=nama&sortDir='+${revSortDir} } ">Nama Lengkap</a> 
+                                    </th>
+                                    <th scope="col">NPM</th>
+                                    <th scope="col">Program Studi</th>
+                                    <th scope="col">Profile</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr th:each="d : ${all_mahasiswa}">
+                                    <td>[[${d.id}]]</td>
+                                    <td>[[${d.nama}]]</td>
+                                    <th>[[${d.npm}]]</th>
+                                    <td>[[${d.prodi}]]</td>
+                                    <td>[[${d.foto}]]</td>
+                                    <td>
+                                        <a th:href="@{'/edit_data/'+${d.id}}" class="btn btn-sm btn-warning">Edit</a>
+                                        <a th:href="@{'/delete_data/'+${d.id}}" class="btn btn-sm btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Akhir Table -->
+
+                    <!-- Start Pagination -->
+                    <div class="card-footer">
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <p>Total Data : [[${totalElements}]]</p>
+                                <!-- <p>Total Pages : [[${totalPage}]]</p>
+                                <p>Current Page : [[${pageNo}]]</p> -->
+                            </div>
+                            <div class="col-md-6">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li th:classappend="${pageNo==0} ? 'disabled' : '' " class="page-item">
+                                            <a class="page-link" th:href="@{'/page/'+${pageNo-1}}+ '?sortField='+${sortField}+'&sortDir='+${sortDir}">Previous</a>
+                                        </li>
+                                        <li th:each="i : ${#numbers.sequence(1,totalPage)}" th:classappend="${pageNo+1==i} ? 'active' : '' " class="page-item">
+                                            <a class="page-link" th:href="@{'/page/'+${i-1}}+ '?sortField='+${sortField}+'&sortDir='+${sortDir}">[[${i}]]</a>
+                                        </li>
+                                        <li th:classappend="${pageNo+1 == totalPage} ? 'disabled' : '' " class="page-item">
+                                            <a class="page-link" th:href="@{'/page/'+${pageNo+1}}+ '?sortField='+${sortField}+'&sortDir='+${sortDir}">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Pagination -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

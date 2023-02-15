@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/navbar :: html_head}"></head>
+<body style="background-color: #f0f1f2;">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container px-5 mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="card shadow-sm mb-5">
+                    <div class="card-body">
+                        <h4 class="text-center text-primary">Update Data Mahasiswa Form</h4>
+
+                        <form th:action="@{/update_data}" method="post">
+                            <input type="hidden" name="id" th:value="${mhswa.id}">
+
+                            <div class="form-group mt-3">
+                                <label for="nama">Nama Lengkap</label>
+                                <input type="text" class="form-control" name="nama" id="nama" required th:value="${mhswa.nama}">
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="npm">NPM</label>
+                                <input type="number" class="form-control" name="npm" id="npm" required th:value="${mhswa.npm}">
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="prodi">Program Studi</label>
+                                <input type="text" class="form-control" name="prodi" id="prodi" required th:value="${mhswa.prodi}">
+                            </div>
+                            <div class="form-group mt-2 mb-3">
+                                <label for="foto">Profile</label>
+                                <input type="text" class="form-control" name="foto" id="foto" required th:value="${mhswa.foto}">
+                            </div>
+                            <div class="float-end">
+                                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
